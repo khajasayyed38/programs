@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Java8MethodCheatSheet {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<Employee> employees=EmployeeDataBase.getAllEmployees();
         employees.forEach(e-> System.out.println(e.getName()+" "+e.getSalary()));
 
@@ -78,5 +78,8 @@ public class Java8MethodCheatSheet {
         //skip(Long)
         Employee employee = employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1).findFirst().get();
         System.out.println(employee);
+
+        Employee employee1 = employees.stream().filter(t -> t.getName().startsWith("J")).findAny().orElseThrow(() -> new NoSuchElementException("data not found"));
+        System.out.println(employee1);
     }
 }
