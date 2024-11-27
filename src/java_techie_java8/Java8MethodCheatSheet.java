@@ -79,7 +79,16 @@ public class Java8MethodCheatSheet {
         Employee employee = employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1).findFirst().get();
         System.out.println(employee);
 
+        //findAny method
         Employee employee1 = employees.stream().filter(t -> t.getName().startsWith("J")).findAny().orElseThrow(() -> new NoSuchElementException("data not found"));
         System.out.println(employee1);
+
+        //fetching using groupBy method
+        Map<String,List<Employee>> map1= employees.stream().collect(Collectors.groupingBy(Employee::getDept));
+        System.out.println(map1);
+
+        //fetching using groupBy method and its count
+        Map<String,Long> map2=employees.stream().collect(Collectors.groupingBy(Employee::getDept,Collectors.counting()));
+        System.out.println(map2);
     }
 }
